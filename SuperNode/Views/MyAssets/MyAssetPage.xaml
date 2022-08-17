@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    BackgroundImageSource="{StaticResource bg.main}"
+    x:Class="SuperNode.MyAssetPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SuperNode"
+    xmlns:viewmodel="clr-namespace:SuperNode.ViewModel">
+    <ContentPage.ToolbarItems BackgroundImageSource="{binding bg.item}">
+        <ToolbarItem Clicked="ToolBarItem_Add" Text="添加" >
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <DataTemplate
+            xmlns:viewmodel="clr-namespace:SuperNode.ViewModel"
+            x:Key="MyAssetItemView"
+            x:DataType="viewmodel:DBMyAsset"
+            >
+            <Border
+                Margin="5"
+                BackgroundColor="#11888888"
+                StrokeThickness="0.5"
+                Stroke="{StaticResource border.edage}"
+                >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="3,3,3,3" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Border_ClickGestureRecognizer_Clicked"></TapGestureRecognizer>
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="60,*,80"  >
+                    <Label Margin="4" Text="{Binding platform}"  VerticalOptions="Center"/>
+                    <Label Grid.Column="1" Text="{Binding user}" HorizontalOptions="End" VerticalOptions="Center"/>
+                    <Button Grid.Column="2" Text="Copy" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <CollectionView
+            ItemTemplate="{StaticResource MyAssetItemView}"
+            x:DataType="viewmodel:DBMyAssetSet"
+            ItemsSource="{Binding Items}"
+            SelectionMode="None" >
+            <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical"
+                        Span="2"
+                             VerticalItemSpacing="2"
+                             />
+        </CollectionView.ItemsLayout>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentPage>

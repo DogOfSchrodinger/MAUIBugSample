@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SuperNode.PageReview"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SuperNode"
+    xmlns:viewmodel="clr-namespace:SuperNode.ViewModel">
+    <ContentPage.Resources>
+        <DataTemplate xmlns:viewmodel="clr-namespace:SuperNode.ViewModel" x:Key="ReviewItemControl">
+            <Frame
+                xmlns:viewmodel="clr-namespace:SuperNode.ViewModel"
+                Margin="2,2"
+                x:DataType="viewmodel:ReviewRecord"
+                BorderColor="#B0BCFC"
+                CornerRadius="2"
+                HasShadow="False">
+                <Grid Margin="0,0" RowDefinitions="auto,*,auto">
+                    <Editor
+                        Grid.Row="0"
+                        BackgroundColor="#86A0F2"
+                        Completed="Editor_Completed"
+                        HorizontalOptions="FillAndExpand"
+                        MaxLength="128"
+                        MinimumHeightRequest="50"
+                        Text="{Binding content}" />
+                    <VerticalStackLayout Grid.Row="1">
+                        <HorizontalStackLayout HeightRequest="36" Spacing="2">
+                            <Grid ColumnDefinitions="auto,*,auto,auto" ColumnSpacing="2">
+                                <Label
+                                    HorizontalOptions="Start"
+                                    Text="{Binding seconds, StringFormat='{0:ddd}'}"
+                                    VerticalOptions="Center" />
+                                <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End">
+                                    <Button
+                                        Margin="1,1"
+                                        Clicked="OnClickToDoItemViewSaveBtn"
+                                        FontSize="10"
+                                        HorizontalOptions="End"
+                                        IsVisible="{Binding canOperation}"
+                                        Text="Save" />
+                                    <Button
+                                        Margin="1,1"
+                                        Clicked="OnClickToDoItemViewDeleteBtn"
+                                        FontSize="10"
+                                        HorizontalOptions="End"
+                                        IsVisible="{Binding canOperation}"
+                                        Text="Delete" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="auto,*,auto">
+        <HorizontalStackLayout
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="1,1"
+            BackgroundColor="LightGray"
+            HeightRequest="30"
+            HorizontalOptions="End"
+            Spacing="2" />
+        <ScrollView Grid.Row="1" Grid.Column="0">
+            <VerticalStackLayout>
+                <CollectionView
+                    x:DataType="viewmodel:ReviewRecordSet"
+                    HorizontalOptions="FillAndExpand"
+                    ItemTemplate="{StaticResource ReviewItemControl}"
+                    ItemsSource="{Binding Items}"
+                    SelectionChanged="CollectionView_SelectionChanged"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            HorizontalItemSpacing="2"
+                            Orientation="Vertical"
+                            VerticalItemSpacing="2" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

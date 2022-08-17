@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SuperNode.Views.MyAssets.MyAssetItemPage"
+    xmlns:viewmodel="clr-namespace:SuperNode.ViewModel"
+             Title="MyAssetItemPage">
+    <VerticalStackLayout Margin="20" 
+            x:DataType="viewmodel:DBMyAsset"
+                         >
+        <Label Text="平台" />
+        <Entry 
+            Text="{Binding  platform}" 
+               />
+        <Label Text="账号" />
+        <Entry 
+            Text="{Binding user}" 
+               Placeholder="输入账号" 
+            />
+        <Label Text="助记码" />
+        <Entry 
+            MaxLength="5"
+            Text="{Binding code}" 
+               Placeholder="输入助记码，不要输入密码" 
+            />
+        <Label Text="手机号码" />
+        <Entry 
+            MaxLength="11"
+            Text="{Binding phone}" 
+            />
+        <Label Text="邮箱" />
+        <Entry 
+            Text="{Binding phone}" 
+            />
+        <Label Text="链接" />
+        <Entry 
+            Text="{Binding phone}" 
+            />
+        <Label Text="备注" />
+        <Entry 
+            Text="{Binding phone}" 
+            />
+        <Button Text="Save" 
+                Clicked="OnSaveButtonClicked" />
+        <Button Text="Delete"
+                Clicked="OnDeleteButtonClicked" />
+        <Button Text="Cancel" 
+                Clicked="OnCancelButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage>

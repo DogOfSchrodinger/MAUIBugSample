@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SuperNode.ToDoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundImageSource="{StaticResource bg.main}"
+    xmlns:local="clr-namespace:SuperNode"
+    xmlns:viewmodel="clr-namespace:SuperNode.ViewModel"
+    >
+    <ContentPage.ToolbarItems BackgroundImageSource="{binding bg.item}">
+        <ToolbarItem Clicked="ToolBar_AddItem" Text="添加" >
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <DataTemplate
+            xmlns:viewmodel="clr-namespace:SuperNode.ViewModel"
+            x:Key="ToDoItemView"
+            x:DataType="viewmodel:DBToDo"
+            >
+            <Border
+                Margin="1"
+                BackgroundColor="#11888888"
+                StrokeThickness="0.5"
+                Stroke="{StaticResource border.edage}"
+                Focused="Border_Focused"
+                Unfocused="Border_Unfocused"
+                >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="3,3,3,3" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ClickGestureRecognizer_Clicked"></TapGestureRecognizer>
+                </Border.GestureRecognizers>
+                <Grid RowDefinitions="40,30" Padding="0" Margin="3,3,3,3">
+                    <Entry
+                BackgroundColor="#00888888"
+                        ClearButtonVisibility="WhileEditing"
+                        CharacterSpacing="1"
+                        ReturnType="Send"
+                        FontSize="14"
+                        Grid.Row="0"
+                        Margin="1"
+                        HorizontalOptions="FillAndExpand"
+                        MaxLength="128"
+                        Text="{Binding content}"
+                        TextColor="#302323"
+                        Completed="Editor_Completed"
+                        Focused="Editor_Focused"
+                        Unfocused="Editor_Unfocused"
+                        VerticalOptions="Start" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" />
+                    <Grid Grid.Row="1" ColumnDefinitions="*,40,50"
+                          >
+                        <Label
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            FontSize="11"
+                            Text="{Binding seconds}"
+                            TextColor="#A59797"
+                            VerticalTextAlignment="Center"/>
+                        <Button
+                            IsVisible="{Binding canOperation}"
+                            VerticalOptions="Center"
+                            Grid.Column="1"
+                            FontSize="10"
+                            Margin="1"
+                            Clicked="OnClickToDoItemViewDeleteBtn"
+                            Text="X" />
+                        <Switch
+                            VerticalOptions="Center"
+                            Grid.Column="2"
+                            IsToggled="{Binding done}"
+                            Toggled="Switch_Toggled"
+                            HorizontalOptions="End"
+                            />
+                    </Grid>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+    <Grid ColumnDefinitions="*,*" >
+        <CollectionView
+            Grid.Column="0"
+            HorizontalOptions="FillAndExpand"
+            ItemTemplate="{StaticResource ToDoItemView}"
+            x:DataType="viewmodel:ToDoItemDataSet"
+            ItemsSource="{Binding DoneItems}"
+            SelectionMode="None" >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 VerticalItemSpacing="0"
+                                 HorizontalItemSpacing="0"/>
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+        <CollectionView
+            Grid.Column="1"
+            HorizontalOptions="FillAndExpand"
+            ItemTemplate="{StaticResource ToDoItemView}"
+            x:DataType="viewmodel:ToDoItemDataSet"
+            ItemsSource="{Binding ToDoItems}"
+            SelectionMode="None" >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 VerticalItemSpacing="0"
+                                 HorizontalItemSpacing="0"/>
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

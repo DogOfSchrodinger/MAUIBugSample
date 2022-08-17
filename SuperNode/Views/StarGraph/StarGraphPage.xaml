@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SuperNode.StarGraphPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:drawables="clr-namespace:SuperNode.Drawables"
+    xmlns:local="clr-namespace:SuperNode"
+    xmlns:viewmodel="clr-namespace:SuperNode.ViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarItem_Clicked_SameLv" Text="同级" />
+        <ToolbarItem Clicked="ToolbarItem_Clicked_NextLv" Text="下级" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <drawables:NodeGraphCanvas x:Key="canvas" />
+        <drawables:NodeDrawable x:Key="node_drawable" />
+    </ContentPage.Resources>
+    <Grid ColumnDefinitions="120,*">
+        <Frame
+            Margin="1"
+            Padding="1"
+            BorderColor="{StaticResource Dark_FrameBorder}"
+            CornerRadius="3"
+            WidthRequest="120">
+            <Grid RowDefinitions="*,40">
+                <ListView
+                    Margin="1"
+                    x:DataType="viewmodel:DBNodeSet"
+                    HorizontalOptions="Center"
+                    ItemSelected="ListView_ItemSelected"
+                    ItemsSource="{Binding RootItems}"
+                    SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="viewmodel:DBNode">
+                            <TextCell Height="30" Text="{Binding content}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button
+                    Grid.Row="1"
+                    Clicked="Button_Clicked"
+                    FontSize="35"
+                    HorizontalOptions="Fill"
+                    Text="+" />
+            </Grid>
+        </Frame>
+        <GraphicsView
+            x:Name="graph"
+            Grid.Column="1"
+            BackgroundColor="#C6EDE1"
+            Drawable="{StaticResource Key=canvas}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <GraphicsView.GestureRecognizers>
+                <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated" />
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </GraphicsView.GestureRecognizers>
+        </GraphicsView>
+        <AbsoluteLayout
+            x:Name="node_container"
+            Grid.Column="1"
+            Margin="1"
+            Padding="1" />
+    </Grid>
+</ContentPage>

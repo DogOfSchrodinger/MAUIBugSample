@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SuperNode.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SuperNode"
+    xmlns:views="clr-namespace:SuperNode"
+    Shell.FlyoutBehavior="Disabled">
+    <TabBar>
+        <Tab Title="总览" Icon="{StaticResource TabOne}">
+            <ShellContent
+                Title="总览"
+                ContentTemplate="{DataTemplate local:DashBoardPage}"
+                Route="OnePage" />
+        </Tab>
+        <Tab Title="清单" Icon="{StaticResource TabTwo}">
+            <ShellContent
+                Title="清单"
+                ContentTemplate="{DataTemplate local:ToDoPage}"
+                Route="TwoPage" />
+        </Tab>
+        <Tab Title="微记" Icon="{StaticResource TabThree}">
+            <ShellContent
+                Title="微记"
+                ContentTemplate="{DataTemplate local:DashBoardPage}"
+                Route="ThreePage" />
+        </Tab>
+        <Tab Title="复盘" Icon="{StaticResource TabFour}">
+            <ShellContent
+                Title="复盘"
+                ContentTemplate="{DataTemplate local:MyAssetPage}"
+                Route="FourPage" />
+        </Tab>
+        <Tab Title="星图" Icon="{StaticResource TabFive}">
+            <ShellContent
+                Title="星图"
+                ContentTemplate="{DataTemplate local:StarGraphPage}"
+                Route="FourPage" />
+        </Tab>
+    </TabBar>
+</Shell>

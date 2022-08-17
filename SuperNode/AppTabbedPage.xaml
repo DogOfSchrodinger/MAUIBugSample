@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="SuperNode.AppTabbedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:local="clr-namespace:SuperNode;assembly=SuperNode"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    BarTextColor="#253853"
+    SelectedTabColor="#B6C7DE"
+    UnselectedTabColor="#E8F1FD"
+    BarBackgroundColor="Blue" 
+    android:TabbedPage.IsSwipePagingEnabled="False"
+    >
+    <NavigationPage Title="总览">
+        <x:Arguments>
+            <local:DashBoardPage Title="总览" />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="清单"  IconImageSource="{StaticResource TabTwo}" >
+        <x:Arguments>
+            <local:ToDoPage Title="清单" />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="微记" IconImageSource="{StaticResource TabThree}">
+        
+    </NavigationPage>
+    <NavigationPage Title="复盘" IconImageSource="{StaticResource TabFour}">
+        <x:Arguments>
+            <local:MyAssetPage Title="复盘" />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="星图" IconImageSource="{StaticResource TabFive}">
+        <x:Arguments>
+            <local:StarGraphPage Title="星图" />
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>
